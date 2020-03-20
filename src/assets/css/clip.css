@@ -1,0 +1,63 @@
+.clip {
+  box-shadow: 1px 1px 5px rgba(48, 49, 51, .5);
+}
+
+.clip:before,
+.clip:after {
+  content: "";
+  display: block;
+  border: 2px solid #409eff;
+  border-radius: 5px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: -2px;
+}
+
+.clip:hover:before {
+  animation: clip1 4s linear infinite;
+}
+
+.clip:hover:after {
+  animation: clip2 4s linear infinite;
+}
+
+
+/* 350 300 */
+
+
+/* 351 301 */
+
+@keyframes clip1 {
+  0%,
+  100% {
+    clip: rect(0px, 351px, 2px, 0px);
+  }
+  25% {
+    clip: rect(0px, 351px, 309px, 349px);
+  }
+  50% {
+    clip: rect(299px, 351px, 301px, 0px);
+  }
+  75% {
+    clip: rect(0px, 2px, 301px, 0px);
+  }
+}
+
+@keyframes clip2 {
+  0%,
+  100% {
+    clip: rect(299px, 351px, 301px, 0px);
+  }
+  25% {
+    clip: rect(0px, 2px, 301px, 0px);
+  }
+  50% {
+    clip: rect(0px, 351px, 2px, 0px);
+  }
+  75% {
+    clip: rect(0px, 351px, 309px, 349px);
+  }
+}

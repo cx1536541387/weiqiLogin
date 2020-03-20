@@ -1,0 +1,27 @@
+@import './normalize.css';
+@import './clip.css';
+@import './clip2.css';
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  line-height: 1;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+button {
+  outline: none;
+}
+
+body {
+  /* background: url("../img/home/back.jpg"); */
+}
