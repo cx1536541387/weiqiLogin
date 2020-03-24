@@ -6,13 +6,13 @@
 
     <!-- //考试公告 -->
     <div class="message">
-      <game-box class="yule clip">
+      <game-box class="yule clip" :game-data="gameYule" :type="0">
         <span @click="ToSignUp" class="more">更多&gt;</span>
       </game-box>
       <div>
         <img src="~assets/img/home/duiyi.jpg" alt="" width="400px" height="300px">
       </div>
-      <game-box class="duanwei clip">
+      <game-box class="duanwei clip" :game-data="gameDuanwei" :type="1">
         <span @click="ToSignUp" class="more">更多&gt;</span>
       </game-box>
     </div>
@@ -26,8 +26,17 @@
 
 <script>
 import GameBox from 'components/common/GameBox'
+
+import {getYule,getDuanwei} from 'network/common/getGameMsg'
+
 export default {
   name:'HomeChild',
+  data(){
+    return {
+      gameYule:[],
+      gameDuanwei:[],
+    }
+  },
   components:{
     GameBox
   },
@@ -36,6 +45,18 @@ export default {
       this.$store.state.tabbar = 3;
       this.$router.push({path:'/signup'})
     }
+  },
+  created(){
+    getYule().then(res=>{
+      for(let i of res.data){
+        this.gameYule = i
+      }     
+    })
+    getDuanwei().then(res=>{
+      for(let i of res.data){
+        this.gameDuanwei = i
+      }
+    })
   }
 }
 </script>

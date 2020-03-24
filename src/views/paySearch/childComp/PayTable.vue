@@ -6,18 +6,45 @@
         <td>是否缴费</td>
         <td>操作</td>
       </tr>
-      <tr>
-        <td>弈林围棋第一届交流娱乐赛</td>
-        <td>未缴费</td>
-        <td>去缴费</td>
+      <tr v-for="item in payMsg" :key="item.id">
+        <td>{{item.gname}}</td>
+        <td>{{item.ispay == '0'? '未缴费' : '已缴费'}}</td>
+        <td><span @click="open(item.pay,item.id)">{{item.ispay == '0'? '去缴费' : ''}}</span></td>
       </tr>
     </table>
   </div>
 </template>
 
 <script>
+import PayImg from './PayImg'
+
 export default {
-  name:'PayTable'
+  name:'PayTable',
+  components:{
+    PayImg
+  },
+  props:{
+    payMsg:{
+      type:Array,
+      default(){
+        return []
+      }
+    }
+  },
+  methods:{
+    open(pay,id){
+      const h = this.$createElement;
+      this.$msgbox({
+        title: '缴费',
+        message: h(PayImg,{props:{data:pay},key:id}),
+        showConfirmButton:false
+      }).then(action => {
+        console.log(action);     
+      }).catch(err=>{
+        console.log(err);
+      });
+    }
+  }
 }
 </script>
 
@@ -45,5 +72,11 @@ export default {
   }
   .table td:nth-of-type(3n){
     width: 100px;
+  }
+
+  .table span{
+    text-decoration: underline;
+    color: blue;
+    cursor: pointer;
   }
 </style>

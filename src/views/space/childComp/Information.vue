@@ -33,12 +33,12 @@
           <td>是否缴费</td>
           <td>报名号</td>
         </tr>
-        <tr>
-          <td>弈林围棋第一届交流娱乐赛</td>
-          <td>时间</td>
-          <td>地点</td>
-          <td>是否缴费</td>
-          <td>报名号</td>
+        <tr v-for="item in signMsg" :key="item.id">
+          <td>{{item.gname}}</td>
+          <td>{{item.gtime}}</td>
+          <td>{{item.gplace}}</td>
+          <td>{{item.ispay == '0'? '未缴费' : '已缴费'}}</td>
+          <td>{{item.gamecode}}</td>
         </tr>
       </table>
     </div>
@@ -49,13 +49,16 @@
 import ChangeInfo from './ChangeInfo'
 import BlueTitle from 'components/common/BlueTitle'
 
+import {getSignMsg} from 'network/common/getSignMsg'
+
 export default {
   name:'Information',
   data(){
     return {
       dialogVisible:false,
       level:'',
-      email:''
+      email:'',
+      signMsg:[]
     }
   },
   components:{
@@ -68,7 +71,10 @@ export default {
       case "2" : this.level = '业余'; break;
       case "3" : this.level = '专业'; break;
     }
-    this.email = this.$store.state.email
+    this.email = this.$store.state.email,
+    getSignMsg(this.$store.state.username).then(res=>{
+      this.signMsg = res.data
+    })
   },
   computed:{
     f1(){
@@ -87,8 +93,6 @@ export default {
       }
     },
     f2(newVal,oldVal){
-      console.log('change');
-      
       this.email = newVal
     }
   },
@@ -143,13 +147,13 @@ export default {
   border-left: none;
 }
 .baoming .table td:nth-of-type(1){
-  width: 280px;
+  width: 260px;
 }
 .baoming .table td:nth-of-type(2){
-  width: 120px;
+  width: 160px;
 }
 .baoming .table td:nth-of-type(3){
-  width: 280px;
+  width: 260px;
 }
 .baoming .table td:nth-of-type(4){
   width: 80px;

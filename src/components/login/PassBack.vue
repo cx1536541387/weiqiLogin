@@ -66,9 +66,6 @@ import {changePass} from 'network/user/passback'
 
 export default {
   name:'PassBack',
-  props:{
-    steData:Boolean,
-  },
   data(){
     return {
       username:'',

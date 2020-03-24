@@ -50,8 +50,6 @@ export default {
       tabbar:1,
       outerVisible: false,
       innerVisible: false,
-      // 密码找回使用的参数
-      setData:false,
       imageUrl:''
     }
   },

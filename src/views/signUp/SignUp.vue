@@ -1,25 +1,14 @@
 <template>
   <div id="signup">
-    <!-- <blue-title>比赛说明</blue-title>
-    <ul>
-      <ol>1.凭借报名号入场</ol>
-  ​    <ol>2.入场后等待工作人员信号统一入座</ol>
-  ​    <ol>3.入座后禁止说话</ol>
-  ​    <ol>4.裁判员宣布比赛开始双方选手方可开始比赛。</ol>
-  ​    <ol>5.比赛期间一旦出现违规情况直接取消比赛资格</ol>
-    </ul> -->
 
     <blue-title>娱乐赛</blue-title>
     <div class="box yule">
-      <game-box class="clip box-item"/>
-      <game-box class="clip box-item"/>
-      <game-box class="clip box-item"/>
+      <game-box class="clip box-item" v-for="item in gameYule" :key="item.gid" :game-data="item" :type="0"/>
     </div>
 
     <blue-title>段位赛</blue-title>
     <div class="box duanwei">
-      <game-box class="clip box-item"/>
-      <game-box class="clip box-item"/>
+      <game-box class="clip box-item" v-for="item in gameDuanwei" :key="item.gid" :game-data="item" :type="1"/>
     </div>
     
   </div>
@@ -30,10 +19,24 @@ import BlueTitle from 'components/common/BlueTitle'
 
 import GameBox from 'components/common/GameBox'
 
+import {getYule,getDuanwei} from 'network/common/getGameMsg'
+
 export default {
   name:'SignUp',
+  data(){
+    return {
+      gameYule:[],
+      gameDuanwei:[]
+    }
+  },
   created(){
-    this.$store.state.tabbar = 3
+    this.$store.state.tabbar = 3,
+    getYule().then(res=>{
+        this.gameYule = res.data.reverse()   
+    })
+    getDuanwei().then(res=>{
+        this.gameDuanwei = res.data.reverse()
+    })
   },
   components:{
     BlueTitle,

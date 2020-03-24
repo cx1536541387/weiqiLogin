@@ -2,7 +2,7 @@
   <div id="paysearch">
     <img src="~assets/img/common/00.jpg" alt="">
     <blue-title>缴费情况</blue-title>
-    <pay-table/>
+    <pay-table :pay-msg="payMsg"/>
   </div>
 </template>
 
@@ -11,10 +11,20 @@ import PayTable from './childComp/PayTable'
 
 import BlueTitle from 'components/common/BlueTitle'
 
+import {getSignMsg} from 'network/common/getSignMsg'
+
 export default {
   name:'PaySearch',
+  data(){
+    return {
+      payMsg:[]
+    }
+  },
   created(){
     this.$store.state.tabbar = 4
+    getSignMsg(this.$store.state.username).then(res=>{
+      this.payMsg = res.data
+    })
   },
   components:{
     BlueTitle,
