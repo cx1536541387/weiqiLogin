@@ -34,6 +34,7 @@ export default {
     return {
       signMsg:{
         username:this.$store.state.username,
+        uid:this.$store.state.uid,
         gname:this.gameData.gname,
         gtime:this.gameData.gtime,
         gplace:this.gameData.gplace,

@@ -7,6 +7,7 @@ export function gameSignUp(formData) {
     gname: formData.gname,
     gtime: formData.gtime,
     gplace: formData.gplace,
+    uid: formData.uid,
   });
   return request({
     url: '/user/signUp.php',

@@ -32,11 +32,40 @@
 
 /* 200 60 */
 
-
-/* 202 62 */
-
 @keyframes clip11 {
   0%,
+  100% {
+    clip: rect(0px, 200px, 2px, 0px);
+  }
+  25% {
+    clip: rect(0px, 200px, 60px, 198px);
+  }
+  50% {
+    clip: rect(58px, 200px, 60px, 0px);
+  }
+  75% {
+    clip: rect(0px, 2px, 60px, 0px);
+  }
+}
+
+@keyframes clip22 {
+  0%,
+  100% {
+    clip: rect(58px, 200px, 60px, 0px);
+  }
+  25% {
+    clip: rect(0px, 2px, 60px, 0px);
+  }
+  50% {
+    clip: rect(0px, 200px, 2px, 0px);
+  }
+  75% {
+    clip: rect(0px, 200px, 60px, 198px);
+  }
+}
+
+
+/* 0%,
   100% {
     clip: rect(0px, 202px, 2px, 0px);
   }
@@ -48,21 +77,4 @@
   }
   75% {
     clip: rect(0px, 2px, 62px, 0px);
-  }
-}
-
-@keyframes clip22 {
-  0%,
-  100% {
-    clip: rect(58px, 202px, 60px, 0px);
-  }
-  25% {
-    clip: rect(0px, 2px, 62px, 0px);
-  }
-  50% {
-    clip: rect(0px, 202px, 2px, 0px);
-  }
-  75% {
-    clip: rect(0px, 202px, 62px, 200px);
-  }
-}
+  } */

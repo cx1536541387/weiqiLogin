@@ -1,12 +1,12 @@
 <template>
-  <div id="space">
+  <div id="adminspace">
     <div class="left">
       <div class="user-img">
         <el-upload
           class="avatar-uploader"
           name="image"
           action="http://localhost:3000/saveimg.php"
-          :data="username"
+          :data="{username,identify}"
           :show-file-list="false"
           :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload">
@@ -15,30 +15,35 @@
         </el-upload>
       </div>
       <div class="user-box" @click="tabIndex=1">
-        <p class="user-p clip2"><span>个人信息</span></p>
+        <p class="user-p clip2"><span>用户管理</span></p>
       </div>
       <div class="user-box" @click="tabIndex=2">
-        <p class="user-p clip2"><span>修改密码</span></p>
+        <p class="user-p clip2"><span>报名管理</span></p>
       </div>
       <div class="user-box" @click="tabIndex=3">
-        <p class="user-p clip2"><span>修改邮箱</span></p>
+        <p class="user-p clip2"><span>添加比赛</span></p>
       </div>
+      <!-- <div class="user-box" @click="tabIndex=4">
+        <p class="user-p clip2"><span>成绩录入</span></p>
+      </div> -->
     </div>
     <div class="right">
-      <information v-if="tabIndex==1"/>
-      <change-pass v-if="tabIndex==2"/>
-      <change-email v-if="tabIndex==3"/>
+      <user-manage v-if="tabIndex==1"/>
+      <sign-manage v-if="tabIndex==2"/>
+      <add-game v-if="tabIndex==3"/>
+      <!-- <add-grade v-if="tabIndex==4"/>   -->
     </div>
   </div>
 </template>
 
 <script>
-import Information from './user/Information'
-import ChangePass from './user/ChangePass'
-import ChangeEmail from './user/ChangeEmail'
+import addGame from './manage/addGame'
+import addGrade from './manage/addGrade'
+import signManage from './manage/signManage'
+import userManage from './manage/userManage'
 
 export default {
-  name:'Space',
+  name:'adminSpace',
   created(){
     this.$store.state.tabbar = 0
   },
@@ -46,15 +51,15 @@ export default {
     return {
       tabIndex:1,
       imageUrl: this.$store.state.imageUrl,
-      username:{
-        username:this.$store.state.username
-      }
+      username:this.$store.state.username,
+      identify:this.$store.state.isAdmin
     }
   },
   components:{
-    Information,
-    ChangePass,
-    ChangeEmail
+    addGame,
+    addGrade,
+    signManage,
+    userManage
   },
   methods:{
     handleAvatarSuccess(res, file) {
@@ -70,7 +75,6 @@ export default {
       // const isImg = file.type === 'image/jpeg';
       const isImg = ['image/jpeg','image/png','image/gif'].includes(file.type)
       const isLt2M = file.size / 1024 / 1024 < 2;
-
       if (!isImg) {
         this.$message.error('上传头像图片只能是jpg,gif,png格式!');
       }
@@ -84,7 +88,7 @@ export default {
 </script>
 
 <style scoped>
-#space{
+#adminspace{
   width: 1140px;
   display: flex;
   margin: 0 auto;

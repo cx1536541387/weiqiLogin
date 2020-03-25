@@ -4,15 +4,13 @@
       <img src="~assets/img/common/00.jpg" alt="">
       <blue-title>查询条件</blue-title>
       <search-box/>
-      <blue-title>查询结果</blue-title>
-      <search-result class="s-result"/>
     </div>
   </div>
 </template>
 
 <script>
 import SearchBox from './childComp/SearchBox'
-import SearchResult from './childComp/SearchResult'
+
 
 import BlueTitle from 'components/common/BlueTitle'
 
@@ -23,7 +21,6 @@ export default {
   },
   components:{
     SearchBox,
-    SearchResult,
     BlueTitle
   }
 }

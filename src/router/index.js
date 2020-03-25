@@ -21,6 +21,8 @@ const Register = () =>
   import ('../views/register/Register')
 const Space = () =>
   import ('../views/space/Space')
+const adminSpace = () =>
+  import ('../views/space/adminSpace')
 const routes = [{
     path: '',
     redirect: '/home'
@@ -57,6 +59,14 @@ const routes = [{
     path: '/space',
     name: 'space',
     component: Space,
+    meta: {
+      requireAuth: true
+    }
+  },
+  {
+    path: '/adminSpace',
+    name: 'adminSpace',
+    component: adminSpace,
     meta: {
       requireAuth: true
     }

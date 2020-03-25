@@ -96,8 +96,10 @@ export default {
             type: 'success'
           });
           this.$store.state.isLogin = true
+          this.$store.state.isAdmin = res.data.admin
           window.sessionStorage.setItem('isLogin', true);  
           this.$emit('closeLogin', this.outerVisible);
+          this.$store.state.uid = res.data.uid
           this.$store.state.username = res.data.username
           this.$store.state.email = res.data.email
           this.$store.state.sex = res.data.sex

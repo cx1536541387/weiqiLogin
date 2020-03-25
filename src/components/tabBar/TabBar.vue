@@ -19,7 +19,7 @@
             <span>{{$store.state.name}}</span> 
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command="a">个人空间</el-dropdown-item>
+            <el-dropdown-item command="a">{{$store.state.isAdmin ? '系统管理' : '个人空间'}}</el-dropdown-item>
             <el-dropdown-item divided command="b">退出</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
@@ -84,6 +84,8 @@ export default {
         type: 'warning'
       }).then(() => {
         this.$store.state.isLogin=false;
+        this.$store.state.isAdmin=false;
+        this.$store.state.uid=''
         this.$store.state.username = ''
         this.$store.state.email = ''
         this.$store.state.sex = ''
@@ -110,7 +112,11 @@ export default {
     handleCommand(command) {
       if(command=='a'){
         this.$store.state.tabbar = false;
-        this.$router.push({path:'/space', query:{name:this.$store.state.name}})
+        if(this.$store.state.isAdmin){
+          this.$router.push({path:'/adminSpace', query:{name:this.$store.state.name}})
+        }else{
+          this.$router.push({path:'/space', query:{name:this.$store.state.name}})
+        }
       }else{
         this.open()
       }

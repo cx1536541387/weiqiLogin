@@ -10,6 +10,7 @@ const state = {
   isAdmin: false,
   // 用户个人信息
   username: '',
+  uid: '',
   name: '',
   email: '',
   sex: '',

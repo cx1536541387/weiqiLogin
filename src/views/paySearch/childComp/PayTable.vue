@@ -75,8 +75,7 @@ export default {
   }
 
   .table span{
-    text-decoration: underline;
-    color: blue;
+    color: #409eff;
     cursor: pointer;
   }
 </style>

@@ -1,5 +1,6 @@
 import { reCheckUsername, reCheckName } from 'network/user/register'
 import { reCheckEmail } from 'network/user/passback'
+import { checkGname } from 'network/manage/addGame'
 import store from '../store/index.js'
 //账号
 export function validateUsername(rule, username, callback) {
@@ -132,4 +133,14 @@ export function checkPass2(val1, val2) {
   } else {
     return '';
   }
+}
+
+//比赛名查重
+export function validateGname(rule, gname, callback) {
+  checkGname(gname).then(res => {
+    if (res.data.key) {
+      callback(new Error('该比赛名已存在'))
+    }
+    callback()
+  })
 }
