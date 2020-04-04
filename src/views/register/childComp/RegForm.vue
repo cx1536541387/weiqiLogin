@@ -154,11 +154,16 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {         
-          register(this.ruleForm)
-          this.$message({
-            message: '恭喜你，账号注册成功',
-            type: 'success'
-          });       
+          register(this.ruleForm).then(res=>{
+            if(res.data.key){
+              this.$message({
+                message: '恭喜你，账号注册成功',
+                type: 'success'
+              });   
+            }else{
+              this.$message('账号注册失败,请稍后再试！')
+            }
+          })
         } else {
           console.log('error submit!!');
           return false;

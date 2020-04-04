@@ -53,12 +53,17 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          changeEmail(this.ruleForm.username,this.ruleForm.email)
-          this.$message({
-            message: '邮箱修改成功',
-            type: 'success'
-          });
-          this.$store.state.email = this.ruleForm.email
+          changeEmail(this.ruleForm.username,this.ruleForm.email).then(res=>{
+            if(res.data.key){
+              this.$message({
+                message: '邮箱修改成功',
+                type: 'success'
+              });
+              this.$store.state.email = this.ruleForm.email
+            }else{
+              this.$message.error('邮箱修改失败，请稍后再试！')
+            }
+          })  
         } else {
           console.log('error submit!!');
           return false;

@@ -120,11 +120,16 @@ export default {
       }).then(() => {
         if(this.username && this.pass && this.pass2 && this.email){
           if(!this.index && !this.index1 && !this.index2 && !this.index3){
-            changePass(this.username,this.pass)
-            this.$message({
-              type: 'success',
-              message: '密码修改成功!',
-            });
+            changePass(this.username,this.pass).then(res=>{
+              if(res.data.key){
+                this.$message({
+                  type: 'success',
+                  message: '密码修改成功!',
+                });
+              }else{
+                this.$message('密码修改失败，请稍后再试！')
+              }
+            })
           }
         }
         else{

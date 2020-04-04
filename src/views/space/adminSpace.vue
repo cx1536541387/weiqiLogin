@@ -63,12 +63,16 @@ export default {
   },
   methods:{
     handleAvatarSuccess(res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw);
-      this.$message({
-        message: res.message,
-        type: 'success'
-      });
-      this.$store.state.imageUrl = res.imgUrl;
+      if(res.key){
+        this.$message({
+          message: res.message,
+          type: 'success'
+        });
+        this.imageUrl = URL.createObjectURL(file.raw);
+        this.$store.state.imageUrl = res.imgUrl;
+      }else{
+        this.$message.error(res.message)
+      }
     },
     beforeAvatarUpload(file) {
       // 传多个格式 ['image/jpeg','image/png','image/gif'].includes(file.type)

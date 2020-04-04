@@ -116,16 +116,19 @@ export default {
       this.$confirm('确认取消报名？','提示')
         .then(_ => {
           delSignMsg(id).then(res=>{
-            this.signMsg = res.data
-          });
-          getSignMsg(this.$store.state.username).then(res=>{
-            this.signMsg = res.data
+            if(res.data.key){
+              this.$message({
+                type: 'success',
+                message: '报名已取消!',
+              });
+              getSignMsg(this.$store.state.username).then(res=>{
+                this.signMsg = res.data
+              })
+              done();
+            }else{
+              this.$message.error('报名取消失败，请稍后再试！')
+            }
           })
-          this.$message({
-          type: 'success',
-          message: '报名已取消!',
-        });
-          done();
         })
         .catch(_ => {});
     }
