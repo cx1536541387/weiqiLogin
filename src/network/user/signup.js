@@ -8,6 +8,7 @@ export function gameSignUp(formData) {
     gtime: formData.gtime,
     gplace: formData.gplace,
     uid: formData.uid,
+    pay: formData.pay
   });
   return request({
     url: '/user/signUp.php',

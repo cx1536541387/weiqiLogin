@@ -32,12 +32,12 @@
       <table cellspacing="0" class="table">
         <tr>
           <td>比赛名</td>
-          <td>用户昵称</td>
+          <td>用户</td>
           <td>名次</td>
         </tr>
         <tr v-for="item in gradeData" :key="item.id">
           <td>{{item.gname}}</td>
-          <td>{{item.name}}</td>
+          <td><img :src="item.imgurl" alt="" style="vertical-align:middle"><span>{{item.name}}</span></td>
           <td>{{item.rank}}</td>
         </tr>
       </table>
@@ -144,9 +144,20 @@ export default {
     width: 280px;
   }
   .table td:nth-of-type(2n){
-    width: 150px;
+    width: 200px;
   }
   .table td:nth-of-type(3n){
     width: 100px;
+  }
+
+  .table td img{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+
+    border: 1px solid #c5c5c5;
+  }
+  .table td span{
+    margin-left: 10px;
   }
 </style>

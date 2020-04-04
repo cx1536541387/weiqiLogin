@@ -11,7 +11,7 @@
       <p>段位限制：{{getLevel}}{{getLevel2}}</p>
       <p>比赛时间：<span>{{gameData.gtime}}</span></p>
       <p>比赛地点：<span :title="gameData.gplace">{{gameData.gplace}}</span></p>
-      <el-button type="primary" plain class="btn" @click="open">点我报名</el-button>
+      <el-button type="primary" plain class="btn" @click="open" :disabled="show">点我报名</el-button>
     </div>
   </div>
 </template>
@@ -38,7 +38,9 @@ export default {
         gname:this.gameData.gname,
         gtime:this.gameData.gtime,
         gplace:this.gameData.gplace,
-      }
+        pay:this.gameData.pay
+      },
+      time:(new Date()).getTime()
     }
   },
   computed:{
@@ -57,6 +59,14 @@ export default {
         case '2': return '业余';break;
         case '3': return '专业';break;
       }
+    },
+    show(){
+      if(this.time>=new Date(this.gameData.btime1).getTime() && 
+        this.time<=(new Date(this.gameData.btime2).getTime() + 86400000)){
+          return false;
+        }else{
+          return true;
+        }
     }
   },
   methods:{
@@ -65,11 +75,16 @@ export default {
         this.$message.error("请先登录！");
         return false;
       }
+      if(this.$store.state.isAdmin){
+        this.$message.error("管理员不允许报名任何比赛！");
+        return false;
+      }
       if(this.gameData.type == '1'){
         if(this.$store.state.level >= this.gameData.glevel && this.$store.state.level <= this.gameData.glevel2){
           this.signUp()
         }else{
           this.$message.error("请检查您的段位是否与报名要求一致！")
+          return false
         }
       }else{
         this.signUp()

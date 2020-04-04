@@ -18,7 +18,6 @@ const state = {
   tel: '',
   level: '',
   times: '',
-  maxrank: '',
   imageUrl: ""
 }
 

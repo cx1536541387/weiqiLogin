@@ -48,7 +48,8 @@
           <td>{{item.gplace}}</td>
           <td>{{item.ispay == '0' ? '未缴费' : '已缴费'}}</td>
           <td>{{item.gamecode}}</td>
-          <td><span @click="toSign(item.uid,item.gname)">确认缴费</span></td>
+          <td><span @click="toSign(item.uid,item.gname)" class="p1" v-if="item.ispay == '0'">确认缴费</span>
+          <span v-else>无</span></td>
         </tr>
       </table>
     </div>
@@ -197,7 +198,7 @@ export default {
 .baoming .table td:nth-of-type(4){
   width: 200px;
 }
-.baoming span{
+.baoming span.p1{
   color: #409eff;
   cursor: pointer;
 }

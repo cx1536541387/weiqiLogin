@@ -11,7 +11,7 @@
         <el-form-item label="用户账号" prop="username">
           <el-input type="text" v-model="ruleForm.username" autocomplete="off" disabled></el-input>
         </el-form-item>
-        <el-form-item label="原邮箱" prop="email">
+        <el-form-item label="新邮箱" prop="email">
           <el-input type="text" v-model="ruleForm.email" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item class="btn-box">
@@ -40,7 +40,7 @@ export default {
       },     
       rules: {
         email: [
-          { required: true, message: '请输入原邮箱', trigger: 'blur' },
+          { required: true, message: '请输入新邮箱', trigger: 'blur' },
           { validator: validateEmail, trigger: 'blur' }
         ],
       },

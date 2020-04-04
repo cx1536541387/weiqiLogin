@@ -9,7 +9,7 @@
       <li><a @click="ToHome" :class="{active:$store.state.tabbar==1}">首页</a></li>
       <li><a @click="ToGradeSearch" :class="{active:$store.state.tabbar==2}">成绩查询</a></li>
       <li><a @click="ToSign" :class="{active:$store.state.tabbar==3}">比赛报名</a></li>
-      <li><a @click="ToPaySearch" :class="{active:$store.state.tabbar==4}">缴费查询</a></li>
+      <li><a @click="ToPaySearch" :class="{active:$store.state.tabbar==4}">缴费</a></li>
     </ul>
     <el-row class="login"> 
       <div v-if="$store.state.isLogin">
@@ -93,7 +93,6 @@ export default {
         this.$store.state.level = ''
         this.$store.state.tel = ''
         this.$store.state.times = ''
-        this.$store.state.maxrank = ''
         this.$store.state.name = ''
         this.$router.push({path:'/home'});
         window.sessionStorage.setItem('isLogin', false);  

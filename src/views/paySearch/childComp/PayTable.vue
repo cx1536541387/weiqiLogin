@@ -9,7 +9,10 @@
       <tr v-for="item in payMsg" :key="item.id">
         <td>{{item.gname}}</td>
         <td>{{item.ispay == '0'? '未缴费' : '已缴费'}}</td>
-        <td><span @click="open(item.pay,item.id)">{{item.ispay == '0'? '去缴费' : ''}}</span></td>
+        <td>
+          <span @click="open(item.pay,item.id)" v-if="item.ispay == '0'" class="p1">去缴费</span>
+          <span v-else>无</span>
+        </td>
       </tr>
     </table>
   </div>
@@ -74,7 +77,7 @@ export default {
     width: 100px;
   }
 
-  .table span{
+  .table span.p1{
     color: #409eff;
     cursor: pointer;
   }

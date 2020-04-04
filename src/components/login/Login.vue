@@ -107,7 +107,6 @@ export default {
           this.$store.state.level = res.data.level
           this.$store.state.tel = res.data.tel
           this.$store.state.times = res.data.times
-          this.$store.state.maxrank = res.data.maxrank
           this.$store.state.name = res.data.name
           this.$store.state.imageUrl = res.data.imgurl
           this.username = ''

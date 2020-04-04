@@ -50,7 +50,7 @@
             <el-form-item prop="glevel">
               <el-select v-model="ruleForm.glevel" class="selectInput">
                 <el-option label="无限制" value="0" :disabled="disable"></el-option>
-                <el-option label="新手" value="1"></el-option>
+                <el-option label="新手" value="1" :disabled="ruleForm.gtype == '0'"></el-option>
                 <el-option label="业余" value="2" :disabled="(ruleForm.glevel2 != '' && !(ruleForm.glevel2 > '1'))"></el-option>
                 <el-option label="专业" value="3" :disabled="(ruleForm.glevel2 != '' && !(ruleForm.glevel2 > '2'))"></el-option>
               </el-select>
@@ -61,9 +61,9 @@
             <el-form-item prop="glevel2">
               <el-select v-model="ruleForm.glevel2" class="selectInput">
                 <el-option label="无限制" value="0" :disabled="disable"></el-option>
-                <el-option label="新手" value="1" :disabled="(ruleForm.glevel1 != ''  && !(ruleForm.glevel1 < '2'))"></el-option>
-                <el-option label="业余" value="2" :disabled="(ruleForm.glevel1 != ''  && !(ruleForm.glevel1 < '3'))"></el-option>
-                <el-option label="专业" value="3"></el-option>
+                <el-option label="新手" value="1" :disabled="(ruleForm.gtype == '0' || (ruleForm.glevel != ''  && !(ruleForm.glevel < '2')))"></el-option>
+                <el-option label="业余" value="2" :disabled="(ruleForm.gtype == '0' || (ruleForm.glevel != ''  && !(ruleForm.glevel < '3')))"></el-option>
+                <el-option label="专业" value="3" :disabled="ruleForm.gtype == '0'"></el-option>
               </el-select>
             </el-form-item>
           </el-col>

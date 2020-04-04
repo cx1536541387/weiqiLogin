@@ -11,7 +11,6 @@
         <p>电话：<span>{{$store.state.tel}}</span></p>
         <p>段位：<span>{{level}}</span></p>
         <p>比赛次数：<span>{{$store.state.times}}</span></p>
-        <p>最好名次：<span>{{$store.state.maxrank}}</span></p>
         <el-button type="primary" plain class="btn" @click="dialogVisible=true">修改个人信息</el-button>
       </div>
       <div class="box-r">
@@ -32,6 +31,7 @@
           <td>比赛地点</td>
           <td>是否缴费</td>
           <td>报名号</td>
+          <td>操作</td>
         </tr>
         <tr v-for="item in signMsg" :key="item.id">
           <td>{{item.gname}}</td>
@@ -39,6 +39,10 @@
           <td>{{item.gplace}}</td>
           <td>{{item.ispay == '0'? '未缴费' : '已缴费'}}</td>
           <td>{{item.gamecode}}</td>
+          <td>
+            <span class="p1" v-if="item.ispay == '0'" @click="delSign(item.id)">取消报名</span>
+            <span v-else>无</span>
+          </td>
         </tr>
       </table>
     </div>
@@ -49,7 +53,7 @@
 import ChangeInfo from './ChangeInfo'
 import BlueTitle from 'components/common/BlueTitle'
 
-import {getSignMsg} from 'network/common/getSignMsg'
+import {getSignMsg,delSignMsg} from 'network/common/getSignMsg'
 
 export default {
   name:'Information',
@@ -108,6 +112,23 @@ export default {
         })
         .catch(_ => {});
     },
+    delSign(id){
+      this.$confirm('确认取消报名？','提示')
+        .then(_ => {
+          delSignMsg(id).then(res=>{
+            this.signMsg = res.data
+          });
+          getSignMsg(this.$store.state.username).then(res=>{
+            this.signMsg = res.data
+          })
+          this.$message({
+          type: 'success',
+          message: '报名已取消!',
+        });
+          done();
+        })
+        .catch(_ => {});
+    }
   }
 }
 </script>
@@ -122,7 +143,7 @@ export default {
 .info-box .box-l p{
   font-size: 16px;
   margin-left: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 
 .info-box .box-r img{
@@ -130,6 +151,7 @@ export default {
 }
 .info-box .btn{
   margin-left: 20px;
+  margin-top: 15px;
 }
 .baoming .table{
   margin: 0 auto;
@@ -141,6 +163,7 @@ export default {
   border-bottom: none;
 }
 .baoming .table td{
+  width: 80px;
   height: 40px;
   border: 1px solid #c5c5c5;
   border-top: none;
@@ -155,11 +178,8 @@ export default {
 .baoming .table td:nth-of-type(3){
   width: 260px;
 }
-.baoming .table td:nth-of-type(4){
-  width: 80px;
+.baoming span.p1{
+  color: #409eff;
+  cursor: pointer;
 }
-.baoming .table td:nth-of-type(5){
-  width: 120px;
-}
-
 </style>

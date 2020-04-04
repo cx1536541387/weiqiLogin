@@ -8,3 +8,12 @@ export function getSignMsg(data) {
     }
   })
 }
+
+export function delSignMsg(id) {
+  return request({
+    url: '/user/delSign.php',
+    params: {
+      id: id
+    }
+  })
+}
